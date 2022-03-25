@@ -28,7 +28,7 @@ class RequestPage extends Component {
   state = {
     requests: [],
     approvingLoadingStatus: false,
-    approvedPostId: '',
+
     apiLoadingStatus: apiStatusConstants.initial,
   }
 
@@ -107,7 +107,7 @@ class RequestPage extends Component {
   )
 
   approvingRequest = async (userId, postId) => {
-    this.setState({approvingLoadingStatus: true, approvedPostId: postId})
+    this.setState({approvingLoadingStatus: true})
 
     const apiUrl =
       'https://y5764x56r9.execute-api.ap-south-1.amazonaws.com/mockAPI/posts'
@@ -122,10 +122,6 @@ class RequestPage extends Component {
     }
     const response = await fetch(apiUrl, options)
 
-    const data = await response.json()
-
-    console.log(response.ok)
-
     if (response.ok === true) {
       this.setState(prevstate => ({
         requests: prevstate.requests.map(eachRequest => {
@@ -135,7 +131,6 @@ class RequestPage extends Component {
           return eachRequest
         }),
         approvingLoadingStatus: false,
-        approvedPostId: postId,
       }))
     }
 
@@ -181,7 +176,6 @@ class RequestPage extends Component {
   }
 
   render() {
-    const {requests, approvingLoadingStatus} = this.state
     return (
       <RequestPageAppBackground>
         <SideBar />
