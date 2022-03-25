@@ -1,3 +1,5 @@
+import Loader from 'react-loader-spinner'
+
 import {
   CardContainer,
   Heading,
@@ -15,8 +17,20 @@ import {
   ReactionCount,
 } from './styledComponents'
 
+const apiStatusConstants = {
+  initial: 'initial',
+  success: 'success',
+  failure: 'failure',
+  loading: 'loading',
+}
+
 const RequestCard = props => {
-  const {request} = props
+  const {
+    request,
+    approvingRequest,
+    approvingLoadingStatus,
+    approvedPostId,
+  } = props
   const {
     commentsCount,
     postContent,
@@ -25,9 +39,34 @@ const RequestCard = props => {
     reactions,
     title,
     postedBy,
+    approvedStatus,
   } = request
   const {profilePic, userId, username} = postedBy
   const {reactionsCount} = reactions
+
+  const onApproving = () => {
+    approvingRequest(userId, postId)
+  }
+  const renderingLoader = () => (
+    <div className="loader-container" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+    </div>
+  )
+
+  const renderingApprovedStatus = () => {
+    switch (approvingLoadingStatus) {
+      case apiStatusConstants.success:
+        return 'Approved'
+      case apiStatusConstants.initial:
+        return 'Approve'
+      case apiStatusConstants.loading:
+        return renderingLoader()
+
+      default:
+        return null
+    }
+  }
+
   return (
     <CardContainer>
       <Heading>{title.slice(0, 70)}</Heading>
@@ -53,7 +92,15 @@ const RequestCard = props => {
           <ProfilePic src={profilePic} />
           <PostUserName>{username}</PostUserName>
         </ProfilePicContainer>
-        <CardButton>Approve</CardButton>
+        {approvingLoadingStatus ? (
+          <CardButton onClick={onApproving}>
+            <Loader type="TailSpin" color="#ffffff" height={20} width={20} />
+          </CardButton>
+        ) : (
+          <CardButton onClick={onApproving}>
+            {approvedStatus ? 'Approved' : 'Approve'}
+          </CardButton>
+        )}
       </ProfilePicButtonContainer>
     </CardContainer>
   )

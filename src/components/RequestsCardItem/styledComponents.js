@@ -12,7 +12,7 @@ export const CardContainer = styled.div`
   margin: 10px;
 `
 export const Heading = styled.h1`
-  width: 200px;
+  width: ${props => (props.outline ? props.width : '200px')};
   font-family: HK Grotesk;
   font-size: 20px;
   font-weight: bold;
@@ -21,7 +21,7 @@ export const Heading = styled.h1`
   line-height: 1.6;
   letter-spacing: normal;
   color: #171f46;
-  flex-grow: 1;
+  flex-grow: ${props => (props.outline ? props.flexGrow : '1')};
 `
 export const Description = styled.p`
   font-family: HK Grotesk;
@@ -54,7 +54,7 @@ export const ProfilePicContainer = styled.div`
   align-items: center;
 `
 export const CardButton = styled.button`
-  width: 93px;
+  width: ${props => (props.outline ? props.width : '93px')};
   height: 40px;
   padding: 8px 20px;
   border-radius: 4px;
@@ -62,8 +62,9 @@ export const CardButton = styled.button`
   border: none;
   color: white;
   font-size: 14px;
-  font-family: HKGrotesk;
+  font-family: HK Grotesk;
   font-weight: 500;
+  cursor: pointer;
 `
 export const PostUserName = styled.p`
   font-family: HK Grotesk;

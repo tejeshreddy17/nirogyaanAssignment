@@ -5,9 +5,10 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   align-items: center;
   min-height: 75px;
+  max-height: 80px;
   flex-grow: 1;
   border-bottom: 1px solid #d7dfe9;
-  min-width: 100%;
+  width: 100%;
   flex-shrink: 0;
   padding-left: 25px;
 `

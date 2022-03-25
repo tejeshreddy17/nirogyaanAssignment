@@ -24,4 +24,16 @@ export const RequestsAndHeaderContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-grow: 1;
+`
+export const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbfbfb;
+  flex-grow: 1;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
 `
