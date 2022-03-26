@@ -14,7 +14,6 @@ export const SidebarContainer = styled.div`
 `
 export const SideBarLogo = styled.img`
   height: 48px;
-  -webkit-animation-delay
 `
 export const SideBarHeadings = styled.h1`
   font-family: HK Grotesk;

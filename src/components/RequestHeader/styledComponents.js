@@ -66,3 +66,7 @@ export const ProfilePic = styled.img`
   width: 48px;
   border-radius: 24px;
 `
+
+export const HeaderLogo = styled.img`
+  height: 48px;
+`

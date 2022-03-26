@@ -66,6 +66,7 @@ class RequestPage extends Component {
         tagName: eachTag.tag_name,
       })),
     }))
+    console.log(formattedData)
     if (response.ok === true) {
       this.setState({
         requests: formattedData,
