@@ -27,7 +27,6 @@ const apiStatusConstants = {
 class RequestPage extends Component {
   state = {
     requests: [],
-    approvingLoadingStatus: false,
 
     apiLoadingStatus: apiStatusConstants.initial,
   }
@@ -66,9 +65,7 @@ class RequestPage extends Component {
         tagId: eachTag.tag_id,
         tagName: eachTag.tag_name,
       })),
-      approvedStatus: false,
     }))
-    console.log(formattedData)
     if (response.ok === true) {
       this.setState({
         requests: formattedData,
@@ -106,46 +103,8 @@ class RequestPage extends Component {
     </LoaderContainer>
   )
 
-  approvingRequest = async (userId, postId) => {
-    this.setState({approvingLoadingStatus: true})
-
-    const apiUrl =
-      'https://y5764x56r9.execute-api.ap-south-1.amazonaws.com/mockAPI/posts'
-
-    const details = {userId, postId}
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(details),
-    }
-    const response = await fetch(apiUrl, options)
-
-    if (response.ok === true) {
-      this.setState(prevstate => ({
-        requests: prevstate.requests.map(eachRequest => {
-          if (eachRequest.postId === postId) {
-            return {...eachRequest, approvedStatus: !eachRequest.approvedStatus}
-          }
-          return eachRequest
-        }),
-        approvingLoadingStatus: false,
-      }))
-    }
-
-    const {requests} = this.state
-    const updatedRequests = requests.map(eachRequest => {
-      if (eachRequest.postId === postId) {
-        return {...eachRequest, approvedStatus: !eachRequest.approvedStatus}
-      }
-      return eachRequest
-    })
-    console.log(updatedRequests)
-  }
-
   renderingContent = () => {
-    const {requests, approvingLoadingStatus} = this.state
+    const {requests} = this.state
     return (
       <RequestCardsContainer>
         {requests.map(eachRequest => (
@@ -153,7 +112,6 @@ class RequestPage extends Component {
             approvingRequest={this.approvingRequest}
             key={eachRequest.postId}
             request={eachRequest}
-            approvingLoadingStatus={approvingLoadingStatus}
           />
         ))}
       </RequestCardsContainer>
