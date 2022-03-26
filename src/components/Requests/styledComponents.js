@@ -25,6 +25,7 @@ export const RequestsAndHeaderContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-grow: 1;
+  background-color: #fbfbfb;
 `
 export const LoaderContainer = styled.div`
   display: flex;
@@ -36,4 +37,16 @@ export const LoaderContainer = styled.div`
   align-self: stretch;
   width: 100%;
   height: 100%;
+`
+export const HeadingRequestsPage = styled.h1`
+  font-family: HK Grotesk;
+  font-size: 32px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #171f46;
+  margin-left: 35px;
+  margin-bottom: 0px;
 `

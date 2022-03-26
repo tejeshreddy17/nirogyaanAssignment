@@ -9,6 +9,7 @@ import {
   RequestCardsContainer,
   RequestsAndHeaderContainer,
   LoaderContainer,
+  HeadingRequestsPage,
 } from './styledComponents'
 
 import {CardButton, Heading} from '../RequestsCardItem/styledComponents'
@@ -140,6 +141,7 @@ class RequestPage extends Component {
         <SideBar />
         <RequestsAndHeaderContainer>
           <Header />
+
           {this.renderingUI()}
         </RequestsAndHeaderContainer>
       </RequestPageAppBackground>

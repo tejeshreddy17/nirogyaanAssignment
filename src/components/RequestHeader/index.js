@@ -1,3 +1,5 @@
+import {Redirect, withRouter} from 'react-router-dom'
+
 import {AiOutlineSearch} from 'react-icons/ai'
 
 import {
@@ -9,12 +11,20 @@ import {
   ProfilePic,
   PostButtonProfilePicContainer,
   HeaderLogo,
+  ObservationPageHeading,
 } from './styledComponents'
 
 import './index.css'
 
 const Header = props => {
   const {logo, text} = props
+
+  const redirectingToObservations = () => {
+    const {history} = props
+
+    history.push('/observation')
+  }
+
   return (
     <HeaderContainer>
       {!logo && (
@@ -32,7 +42,11 @@ const Header = props => {
           src="https://res.cloudinary.com/tejeshreddy17/image/upload/v1648216918/logo_3x_khkcuf.png"
         />
       )}
+      <ObservationPageHeading>{text}</ObservationPageHeading>
       <PostButtonProfilePicContainer>
+        <PostButton onClick={redirectingToObservations}>
+          Observations
+        </PostButton>
         <PostButton>Write Post</PostButton>
         <ProfilePic
           alt="profilePic"
@@ -43,4 +57,4 @@ const Header = props => {
   )
 }
 
-export default Header
+export default withRouter(Header)

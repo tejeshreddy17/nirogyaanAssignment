@@ -9,6 +9,12 @@ import {
   ObservationPageAppBackground,
   HeadingObservations,
   Styles,
+  CellProfileContainer,
+  CellProfilePic,
+  ReactionIconCountContainer,
+  ReactionCount,
+  ReactionsIcon,
+  Labels,
 } from './styledComponents'
 
 function Table({columns, data}) {
@@ -64,14 +70,51 @@ const Observations = () => {
 
       {
         Header: 'Reported at',
-        accessor: 'posted_at',
+        accessor: 'postedAt',
       },
       {
         Header: 'Reported By',
-        accessor: 'posted_by.profile_pic',
+        accessor: 'postedBy',
+        Cell: cell => {
+          const {value} = cell
+          const {username, profilePic} = value
+          return (
+            <CellProfileContainer>
+              <CellProfilePic src={profilePic} />
+              <p>{username}</p>
+            </CellProfileContainer>
+          )
+        },
       },
-      {Header: 'Comments Count', accessor: 'comments_count'},
-      {Header: 'Post Content', accessor: 'post_content'},
+      {Header: 'Comments Count', accessor: 'commentsCount'},
+      {Header: 'Post Content', accessor: 'postContent'},
+      {
+        Header: 'Reactions',
+        accessor: 'reactions.reactionsCount',
+        Cell: cell => {
+          const {value} = cell
+          console.log(value)
+          return (
+            <ReactionIconCountContainer>
+              <ReactionsIcon src="https://res.cloudinary.com/tejeshreddy17/image/upload/v1648167458/Icon_3x_wfomlz.png" />
+              <ReactionCount>{value}</ReactionCount>
+            </ReactionIconCountContainer>
+          )
+        },
+      },
+      {
+        Header: 'Tags',
+        accessor: 'tags',
+        Cell: cell => {
+          const {value} = cell
+          console.log(value)
+          return value.map(eachTag => (
+            <Labels backgroundColor="#f3fff8" color="#2dca73">
+              {eachTag.tagName}
+            </Labels>
+          ))
+        },
+      },
     ],
     [],
   )
@@ -87,8 +130,25 @@ const Observations = () => {
     const response = await fetch(apiUrl, options)
 
     const data = await response.json()
-    setData(data)
-    console.log(data)
+    const formattedData = data.map(eachData => ({
+      commentsCount: eachData.comments_count,
+      postContent: eachData.post_content,
+      postId: eachData.post_id,
+      postedAt: eachData.posted_at,
+      reactions: {reactionsCount: eachData.reactions.reactions_count},
+      title: eachData.title,
+      postedBy: {
+        profilePic: eachData.posted_by.profile_pic,
+        userId: eachData.posted_by.user_id,
+        username: eachData.posted_by.username,
+      },
+      tags: eachData.tags.map(eachTag => ({
+        tagId: eachTag.tag_id,
+        tagName: eachTag.tag_name,
+      })),
+    }))
+    setData(formattedData)
+    console.log(formattedData)
   }
 
   useEffect(() => {

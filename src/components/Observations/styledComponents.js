@@ -30,6 +30,7 @@ export const Styles = styled.div`
   table {
     border-spacing: 0;
     border: 1px solid #d7dfe9;
+    background-color: white;
 
     tr {
       :last-child {
@@ -74,4 +75,65 @@ export const Styles = styled.div`
       padding: 10px;
     }
   }
+`
+export const CellProfileContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 170px;
+
+  align-self: stretch;
+`
+export const CellProfilePic = styled.img`
+  height: 38px;
+  width: 38px;
+  margin-right: 15px;
+  margin-left: 15px;
+
+  border-radius: 19px;
+`
+export const ReactionIconCountContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
+export const ReactionsIcon = styled.img`
+  height: 16px;
+`
+export const ReactionCount = styled.p`
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #171f46;
+  font-weight: 500;
+  margin: 0px 0px 4px 0px;
+  background-color: red;
+  height: 14px;
+  width: 14px;
+  border-radius: 6px;
+  color: white;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+export const Labels = styled.p`
+  padding: 8px 10px 8px 10px;
+  color: ${props => props.color};
+  background-color: ${props => props.backgroundColor};
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  margin-right: 10px;
+  border-radius: 5px;
 `

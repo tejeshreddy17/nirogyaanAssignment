@@ -11,6 +11,7 @@ export const HeaderContainer = styled.div`
   width: 100%;
   flex-shrink: 0;
   padding-left: 25px;
+  background-color: white;
 `
 export const SearchBarContainer = styled.div`
   display: flex;
@@ -60,6 +61,7 @@ export const PostButton = styled.button`
   font-family: HK Grotesk;
   font-weight: 500;
   margin-right: 35px;
+  cursor: pointer;
 `
 export const ProfilePic = styled.img`
   height: 48px;
@@ -69,4 +71,16 @@ export const ProfilePic = styled.img`
 
 export const HeaderLogo = styled.img`
   height: 48px;
+`
+
+export const ObservationPageHeading = styled.h1`
+  font-family: HK Grotesk;
+  font-size: 24px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #171f46;
+  margin-left: 44px;
 `
