@@ -137,3 +137,14 @@ export const Labels = styled.p`
   margin-right: 10px;
   border-radius: 5px;
 `
+export const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbfbfb;
+  flex-grow: 1;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+`

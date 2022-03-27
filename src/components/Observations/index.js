@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 
 import {useTable} from 'react-table'
 
+import Loader from 'react-loader-spinner'
+
 import Header from '../RequestHeader'
 
 import {
@@ -15,6 +17,7 @@ import {
   ReactionCount,
   ReactionsIcon,
   Labels,
+  LoaderContainer,
 } from './styledComponents'
 
 function Table({columns, data}) {
@@ -61,6 +64,8 @@ function Table({columns, data}) {
 
 const Observations = () => {
   const [DetailsData, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+
   const columns = React.useMemo(
     () => [
       {
@@ -93,7 +98,6 @@ const Observations = () => {
         accessor: 'reactions.reactionsCount',
         Cell: cell => {
           const {value} = cell
-          console.log(value)
           return (
             <ReactionIconCountContainer>
               <ReactionsIcon src="https://res.cloudinary.com/tejeshreddy17/image/upload/v1648167458/Icon_3x_wfomlz.png" />
@@ -107,9 +111,12 @@ const Observations = () => {
         accessor: 'tags',
         Cell: cell => {
           const {value} = cell
-          console.log(value)
           return value.map(eachTag => (
-            <Labels backgroundColor="#f3fff8" color="#2dca73">
+            <Labels
+              key={eachTag.tagName}
+              backgroundColor="#f3fff8"
+              color="#2dca73"
+            >
               {eachTag.tagName}
             </Labels>
           ))
@@ -118,6 +125,7 @@ const Observations = () => {
     ],
     [],
   )
+
   const gettingData = async () => {
     const apiUrl =
       'https://y5764x56r9.execute-api.ap-south-1.amazonaws.com/mockAPI/posts'
@@ -147,8 +155,10 @@ const Observations = () => {
         tagName: eachTag.tag_name,
       })),
     }))
-    setData(formattedData)
-    console.log(formattedData)
+    if (response.ok === true) {
+      setData(formattedData)
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -160,9 +170,15 @@ const Observations = () => {
       <Header logo text="Reporting Portal" />
       <ObservationTableContainer>
         <HeadingObservations>Observations Assigned to me</HeadingObservations>
-        <Styles>
-          <Table columns={columns} data={DetailsData} />
-        </Styles>
+        {loading ? (
+          <LoaderContainer>
+            <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+          </LoaderContainer>
+        ) : (
+          <Styles>
+            <Table columns={columns} data={DetailsData} />
+          </Styles>
+        )}
       </ObservationTableContainer>
     </ObservationPageAppBackground>
   )
